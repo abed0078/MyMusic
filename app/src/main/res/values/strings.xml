@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MusicTest</string>
+    <string name="storage_permission_text">This app needs access to your storage</string>
+</resources>
