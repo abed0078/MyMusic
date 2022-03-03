@@ -2,9 +2,11 @@ package com.example.musictest
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.musictest.databinding.ActivityPlayerBinding
+
 
 
 class PlayerActivity : AppCompatActivity() {
@@ -31,5 +33,7 @@ class PlayerActivity : AppCompatActivity() {
 
             }
         }
+
     }
+
 }   

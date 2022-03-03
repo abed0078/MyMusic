@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">MusicTest</string>
     <string name="storage_permission_text">This app needs access to your storage</string>
+    <string name="todo">TODO</string>
+    <string name="todo3">todo3</string>
+    <string name="tune">tune</string>
+    <string name="more">three_dots</string>
+    <string name="battlesymphony">Battle Symphony</string>
+    <string name="like">like</string>
+    <string name="image">image</string>
+    <string name="one_more_light">One More Light</string>
+    <string name="linkin_park">Linkin Park</string>
+    <string name="todo55">TODO55</string>
 </resources>

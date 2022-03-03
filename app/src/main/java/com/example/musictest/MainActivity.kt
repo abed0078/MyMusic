@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("Range")
     //fun getMp3Files(context: Context): MutableList<Song> {
-   // val fileList = mutableListOf<Song>()
+    // val fileList = mutableListOf<Song>()
     fun getMp3Files(context: Context): ArrayList<Song> {
         val fileList = ArrayList<Song>()
         val projection = arrayOf(
@@ -112,7 +112,8 @@ class MainActivity : AppCompatActivity() {
             MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.ALBUM,
             MediaStore.Audio.Media.ARTIST,
-            MediaStore.Audio.Media.DATA
+            MediaStore.Audio.Media.DATA,
+            MediaStore.Audio.Media.ALBUM_ID
         )
 
 
@@ -129,12 +130,13 @@ class MainActivity : AppCompatActivity() {
                     Song(
                         cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)),
                         cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)),
-                        cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
+                        cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)),
+                        cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM)),
+                        cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)),
+                        cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))
                     )
                 )
-                //, cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))
-                // , cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
-                //  , cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))));
+
             }
         }
         if (cursor != null) {

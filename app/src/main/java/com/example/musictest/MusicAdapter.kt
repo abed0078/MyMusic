@@ -1,11 +1,16 @@
 package com.example.musictest
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.musictest.databinding.RecyclerviewItemBinding
 
 
@@ -51,6 +56,16 @@ class MusicAdapter(private val context: Context, private val songsList: List<Son
         fun bind(songsList: Song) {
             // Binding.songArtist.text = songsList.artist
             Binding.songTitle.text = songsList.title
+            Binding.artist.text = songsList.artist
+            val image:ByteArray?= songsList.path?.let { getAlbumArt(it) }
+            Glide.with(context).load(image).into(Binding.circleImageView)
+
+               /* Glide.with(context).load(songsList.artUri).apply(RequestOptions()
+         .placeholder(R.drawable.ic_launcher_background).centerCrop()).into(Binding.circleImageView)*/
+
+
+
+
 
         }
 
@@ -59,6 +74,15 @@ class MusicAdapter(private val context: Context, private val songsList: List<Son
                 listener.onItemClicked(adapterPosition)
             }
         }
+
+    }
+
+    private fun getAlbumArt(uri: String): ByteArray? {
+       val retriever: MediaMetadataRetriever= MediaMetadataRetriever()
+        retriever.setDataSource(uri)
+        val art: ByteArray? =retriever.embeddedPicture
+        retriever.release()
+        return art
 
     }
 }
