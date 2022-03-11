@@ -23,7 +23,7 @@
             app:srcCompat="@drawable/ic_untitled" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/playPause"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginBottom="94dp"
@@ -46,7 +46,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.171"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/playPause"
             app:srcCompat="@drawable/ic_baseline_skip_next_24" />
 
         <ImageButton
@@ -58,7 +58,7 @@
             android:background="@drawable/custom_next_previous"
             android:contentDescription="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/playPause"
             app:layout_constraintHorizontal_bias="0.826"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_previous" />
@@ -92,19 +92,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_baseline_shuffle_24" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
+            android:background="@drawable/custom_red_buttons"
             android:id="@+id/profile_image"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginTop="46dp"
-            android:background="@drawable/custom_red_buttons"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp"
+            android:contentDescription="@string/todo5000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_shuffle_24" />
+            />
 
         <ImageButton
             android:id="@+id/tune"
@@ -157,11 +156,12 @@
 
         <TextView
             android:id="@+id/songName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="32dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/battlesymphony"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/my_black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -170,11 +170,12 @@
 
         <TextView
             android:id="@+id/artistName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/linkin_park"
+            android:textAlignment="center"
             android:textColor="@color/my_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -182,11 +183,12 @@
 
         <TextView
             android:id="@+id/Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/one_more_light"
+            android:textAlignment="center"
             android:textColor="@color/my_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -203,6 +205,7 @@
             app:layout_constraintTop_toBottomOf="@+id/Name" />
 
         <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekBar"
             android:layout_width="200dp"
             android:layout_height="20dp"
             android:layout_marginBottom="8dp"
@@ -213,7 +216,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/slash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -224,20 +227,20 @@
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvSeekBarStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="1dp"
             android:text="2:30"
-            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/slash"
             app:layout_constraintHorizontal_bias="0.93"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvSeekBarEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
@@ -245,7 +248,7 @@
             android:text="3:36"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.069"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/slash"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

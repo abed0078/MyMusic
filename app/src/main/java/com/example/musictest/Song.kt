@@ -8,6 +8,7 @@ class Song(
     var path: String?,
     var albumArt:String?,
     var artist:String?,
-    var artUri:String?
+    var artUri:String?,
+    var duration:Int
 
 )

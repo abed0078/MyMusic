@@ -16,12 +16,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 import com.example.musictest.databinding.ActivityMainBinding
 import kotlin.system.exitProcess
 
 
 private const val TAG = "MainActivity"
-
+@GlideModule
 class MainActivity : AppCompatActivity() {
     /*  private lateinit var song: ArrayList<Song>
       private var songPosition: Int = 0
@@ -42,7 +44,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
 
         makeRequest()
         //  getMp3Files(this)
@@ -113,7 +114,8 @@ class MainActivity : AppCompatActivity() {
             MediaStore.Audio.Media.ALBUM,
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.DATA,
-            MediaStore.Audio.Media.ALBUM_ID
+            MediaStore.Audio.Media.ALBUM_ID,
+            MediaStore.Audio.Media.DURATION
         )
 
 
@@ -133,7 +135,8 @@ class MainActivity : AppCompatActivity() {
                         cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)),
                         cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM)),
                         cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)),
-                        cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))
+                        cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)),
+                                cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
                     )
                 )
 
