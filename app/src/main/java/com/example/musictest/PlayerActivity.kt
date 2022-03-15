@@ -20,13 +20,15 @@ private const val TAG = "PlayerActivity"
 
 class PlayerActivity : AppCompatActivity() {
     companion object {
+        var buttonIcon: Int = R.drawable.ix_play
+
 
         lateinit var songList: ArrayList<Song>
         lateinit var songLists: List<Song>
         private var songPosition: Int = 0
         var player: MediaPlayer? = null
         var isPlaying: Boolean = false
-        private lateinit var mediaSession:MediaSession
+        private lateinit var mediaSession: MediaSession
         private lateinit var runnable: Runnable
 
     }
@@ -38,33 +40,67 @@ class PlayerActivity : AppCompatActivity() {
         sendData()
 
         binding.playPause.setOnClickListener {
-            if (isPlaying) pauseMusic()
-            else playMusic()
+            /* if (isPlaying) pauseMusic()
+             else playMusic()*/
+            pauseMusic()
         }
+        binding.Play.setOnClickListener {
+            playMusic()
+        }
+
+
+
+
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 
-               // binding.seekBar.max = player!!.duration / 1000
-                /* binding.tvSeekBarStart.text = progress.toString()
-                 if (seekBar != null) {
-                     binding.tvSeekBarEnd.text = seekBar.max.toString()
-                 }*/
+                if (player != null && fromUser)
+                    player!!.seekTo(progress)
 
-                 if (player != null && fromUser)
-                     player!!.seekTo(progress)
+
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
         })
-        runnable= Runnable {
-            this@PlayerActivity.binding.tvSeekBarStart.text =formatDuration(player!!.currentPosition.toLong())
-            this@PlayerActivity. binding.seekBar.progress=player!!.currentPosition
-            Handler(Looper.getMainLooper()).postDelayed(runnable,200)
+        player?.setOnCompletionListener {
+            object : MediaPlayer.OnCompletionListener {
+                override fun onCompletion(mp: MediaPlayer?) {
+
+                    binding.Play.visibility = View.VISIBLE
+                    binding.playPause.visibility = View.GONE
+                    player!!.seekTo(0)
+                    player!!.prepare()
+                    player!!.start()
+
+
+
+                }
+
+            }
 
         }
-        Handler(Looper.getMainLooper()).postDelayed(runnable,0)
+        runnable = Runnable {
+            this@PlayerActivity.binding.tvSeekBarStart.text =
+                formatDuration(player!!.currentPosition.toLong())
+            this@PlayerActivity.binding.seekBar.progress = player!!.currentPosition
+
+
+            if (player!!.isPlaying) {
+                binding.playPause.visibility = View.VISIBLE
+                binding.Play.visibility = View.GONE
+
+            } else {
+                binding.Play.visibility = View.VISIBLE
+                binding.playPause.visibility = View.GONE
+
+            }
+
+            Handler(Looper.getMainLooper()).postDelayed(runnable, 200)
+
+        }
+        Handler(Looper.getMainLooper()).postDelayed(runnable, 0)
 
 
     }
@@ -87,7 +123,6 @@ class PlayerActivity : AppCompatActivity() {
 
             }
         }
-       // binding.seekBar.max = player!!.duration / 1000
         binding.seekBar.max = player!!.duration
 
     }
@@ -101,11 +136,11 @@ class PlayerActivity : AppCompatActivity() {
             player!!.prepare()
             player!!.start()
             isPlaying = true
-            binding.playPause.setImageResource(R.drawable.ic_pause)
-            binding.tvSeekBarStart.text =formatDuration(player!!.currentPosition.toLong())
+            binding.playPause.visibility = View.VISIBLE
+            // binding.playPause.setImageResource(R.drawable.ic_pause)
+            binding.tvSeekBarStart.text = formatDuration(player!!.currentPosition.toLong())
             binding.tvSeekBarEnd.text = formatDuration(player!!.duration.toLong())
-            binding.seekBar.progress=0
-            //binding.seekBar.max = player!!.duration / 1000
+            binding.seekBar.progress = 0
         } catch (e: Exception) {
             return
         }
@@ -113,15 +148,24 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun playMusic() {
-        binding.playPause.setImageResource(R.drawable.ic_pause)
-        isPlaying = true
+        /* isPlaying = true
+         player!!.start()
+         binding.playPause.setImageResource(R.drawable.ic_pause)*/
+        binding.Play.visibility = View.GONE
+        binding.playPause.visibility = View.VISIBLE
         player!!.start()
+
+
     }
 
     private fun pauseMusic() {
-        binding.playPause.setImageResource(R.drawable.ix_play)
-        isPlaying = false
+        /* isPlaying = false
+         player!!.pause()
+         binding.playPause.setImageResource(R.drawable.ix_play)*/
+        binding.Play.visibility = View.VISIBLE
+        binding.playPause.visibility = View.GONE
         player!!.pause()
+
     }
 
     private fun setLayout() {
@@ -147,7 +191,6 @@ class PlayerActivity : AppCompatActivity() {
         return art
 
     }
-
 
 
 }
